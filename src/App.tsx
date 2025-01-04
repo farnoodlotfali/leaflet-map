@@ -2,24 +2,29 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import { lazy, Suspense } from "react";
 import Spinner from "./components/Spinner";
 
-function lazyLoadRoutes(componentName: string, src: string = "pages") {
-  const LazyElement = lazy(
-    () => import(/* @vite-ignore */ `./${src}/${componentName}`)
-  );
-
-  return (
-    <Suspense fallback={<Spinner />}>
-      <LazyElement />
-    </Suspense>
-  );
-}
+const LazyElement = lazy(() => import(`./pages/limitMap`));
+const LazyElement1 = lazy(() => import(`./pages/freeMap`));
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={lazyLoadRoutes("limitMap")} />
-        <Route path="/free" element={lazyLoadRoutes("freeMap")} />
+        <Route
+          path="/"
+          element={
+            <Suspense fallback={<Spinner />}>
+              <LazyElement />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/free"
+          element={
+            <Suspense fallback={<Spinner />}>
+              <LazyElement1 />
+            </Suspense>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
