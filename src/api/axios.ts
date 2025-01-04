@@ -8,6 +8,14 @@ export const AxiosInstance = axios.create({
   },
 });
 
+export const AxiosInstance2 = axios.create({
+  baseURL: "https://nominatim.openstreetmap.org",
+  timeout: 20000,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
 const onError = (
   error: Error & {
     response: { data: { errors: any; message: string }; status: number };
@@ -18,7 +26,6 @@ const onError = (
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
-// with token
 const fetcher = {
   get: <T>(url: string, configs?: AxiosRequestConfig<any> | undefined) =>
     AxiosInstance.get<T>(url, configs)
@@ -55,4 +62,40 @@ const fetcher = {
       .catch((e) => onError(e)),
 };
 
-export { fetcher };
+const fetcher2 = {
+  get: <T>(url: string, configs?: AxiosRequestConfig<any> | undefined) =>
+    AxiosInstance2.get<T>(url, configs)
+      .then(responseBody)
+      .catch((e) => onError(e)),
+  post: <T>(
+    url: string,
+    body: {},
+    configs?: AxiosRequestConfig<any> | undefined
+  ) => {
+    return AxiosInstance2.post<T>(url, body, configs)
+      .then(responseBody)
+      .catch((e) => onError(e));
+  },
+  put: <T>(
+    url: string,
+    body: {},
+    configs?: AxiosRequestConfig<any> | undefined
+  ) =>
+    AxiosInstance2.put<T>(url, body, configs)
+      .then(responseBody)
+      .catch((e) => onError(e)),
+  patch: <T>(
+    url: string,
+    body: {},
+    configs?: AxiosRequestConfig<any> | undefined
+  ) =>
+    AxiosInstance2.patch<T>(url, body, configs)
+      .then(responseBody)
+      .catch((e) => onError(e)),
+  delete: <T>(url: string, configs?: AxiosRequestConfig<any> | undefined) =>
+    AxiosInstance2.delete<T>(url, configs)
+      .then(responseBody)
+      .catch((e) => onError(e)),
+};
+
+export { fetcher, fetcher2 };

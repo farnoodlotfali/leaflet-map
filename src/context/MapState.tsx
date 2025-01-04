@@ -1,6 +1,6 @@
 import { MapContext } from "./mapContext";
 import { useState } from "react";
-import { MapRoutesResponse } from "../types/mapRoutes";
+import { MapRoutesResponse } from "../types";
 import { renderDuration } from "../utils/utils";
 
 const AppState = ({ children }: { children: React.ReactNode }) => {

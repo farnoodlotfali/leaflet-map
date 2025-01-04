@@ -1,4 +1,5 @@
 import {
+  Convertshape2,
   GlobalSearch,
   Icon,
   Location,
@@ -77,6 +78,12 @@ const ActionButtons = () => {
         active={showDirections}
         handleOnClick={toggleDirections}
         title="نمایش اطلاعات مسیریابی"
+      />
+      <Button
+        Icon={Convertshape2}
+        active={showDirections}
+        handleOnClick={toggleDirections}
+        title="انتخاب روی نقشه"
       />
     </div>
   );

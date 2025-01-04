@@ -7,11 +7,9 @@ import {
   ZoomControl,
 } from "react-leaflet";
 import { DEFAULT_CENTER } from "../data/default-center";
-// import MapHandel from "./MapHandel";
 import { LAYER_ITEMS } from "../data/map-layers";
 import { lazy, Suspense } from "react";
 import Spinner from "./Spinner";
-// import RoutingPath from "./RoutingPath";
 
 const RoutingPath = lazy(() => import("./RoutingPath"));
 const MapHandel = lazy(() => import("./MapHandel"));
@@ -43,9 +41,11 @@ const Map = () => {
         })}
       </LayersControl>
       <ZoomControl position="bottomright" />
- 
+      {/* <Suspense fallback={<Spinner />}>
+        <ChooseFromMap />
+      </Suspense> */}
       <Suspense fallback={<Spinner />}>
-      <MapHandel />
+        <MapHandel />
       </Suspense>
       <Suspense fallback={<Spinner />}>
         <RoutingPath />

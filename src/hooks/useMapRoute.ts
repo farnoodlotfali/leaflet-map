@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { ResponseType } from "../types";
 import { HookApiOptions } from "../types/hookOptions";
-import { MapRoutesRequest, MapRoutesResponse } from "../types/mapRoutes";
+import { MapRoutesRequest, MapRoutesResponse } from "../types";
 import { fetcher } from "../api/axios";
 
 export const useMapRoute = (

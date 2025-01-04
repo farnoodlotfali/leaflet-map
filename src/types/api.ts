@@ -3,3 +3,4 @@ export interface ResponseType<T> {
   waypoints: number[];
   routes: T[];
 }
+export type ResponseType2<T> = T;

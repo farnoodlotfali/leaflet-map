@@ -1,5 +1,5 @@
 import { LatLngExpression } from "leaflet";
-import { MapRoutesResponse } from "../types/mapRoutes";
+import { MapRoutesResponse } from "../types";
 
 export const deepCopy = <T>(obj: T): T => {
   if (obj === null || typeof obj !== "object") {

@@ -1,6 +1,5 @@
 import { UseQueryResult } from "@tanstack/react-query";
-import { MapRoutesResponse } from "../types/mapRoutes";
-import { ResponseType } from "../types";
+import { MapRoutesResponse, ResponseType } from "../types";
 import { useMapContext } from "../hooks/useMapContext";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { METHOD_NAME_ITEMS } from "../data/route-method";
