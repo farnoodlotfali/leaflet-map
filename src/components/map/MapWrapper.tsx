@@ -1,8 +1,8 @@
 import "leaflet-rotatedmarker";
 import "leaflet/dist/leaflet.css";
 
-import { PropsWithChildren, useRef } from "react";
-import { LayersControl, MapContainer, TileLayer } from "react-leaflet";
+import { PropsWithChildren, useRef, useState } from "react";
+import { MapContainer, TileLayer } from "react-leaflet";
 import L from "leaflet";
 
 import {
@@ -16,96 +16,115 @@ import {
 
 import MapHandleFlyTo from "./MapHandleFlyTo";
 import MapHandleCenter from "./MapHandleCenter";
-import MapHandleLocationName from "./MapHandleLocationName";
 import { blueMarker } from "../../utils/markers";
-import icon from "../../assets/img/marker.svg";
+import icon from "../../assets/img/marker-purple.svg";
 import { LAYER_ITEMS } from "../../data/map-layers";
+
+import MapLayerControl from "./MapLayerControl";
+import { MapLayerType } from "../../types";
+import MapLayerControlV2 from "./MapLayerControl_v2";
 
 L.Marker.prototype.options.icon = blueMarker;
 const key = new Date().getTime();
 type MapWrapperProps = {
   setCenter?: any;
-  setLocationName?: any;
-  locationReturnAll?: any;
+  setMap?: any;
   doubleClickZoom?: any;
   scrollWheelZoom?: any;
   showCenterMarker?: any;
   center?: any;
   zoom?: any;
   flyTo?: any;
+  tileV1?: any;
+  tileV2?: any;
 };
 
 const MapWrapper: React.FC<PropsWithChildren<MapWrapperProps>> = ({
   children,
   setCenter,
-  setLocationName,
-  locationReturnAll,
   doubleClickZoom = DEFAULT_DOUBLE_CLICK_ZOOM,
   scrollWheelZoom = DEFAULT_SCROLL_WHEEL_ZOOM,
   showCenterMarker = DEFAULT_SHOW_MARKER,
   center = DEFAULT_CENTER,
   zoom = DEFAULT_ZOOM,
+  tileV1 = false,
+  tileV2 = false,
   flyTo = {
     zoom: null,
     center: null,
   },
 }) => {
-  const mapRef = useRef<L.Map>(null);
+  const mapRef = useRef<L.Map | null>(null);
+  const [selectedLayer, setSelectedLayer] = useState(LAYER_ITEMS[0]);
+
+  const handleLayer = (lay: MapLayerType) => {
+    setSelectedLayer(lay);
+
+    if (mapRef.current) {
+      mapRef.current.eachLayer((layer) => {
+        if (!!layer?.options.attribution) {
+          mapRef.current?.removeLayer(layer);
+        }
+      });
+
+      const newLayer = L.tileLayer(lay.url, {
+        attribution: lay.attribution,
+      });
+      newLayer.addTo(mapRef.current);
+    }
+  };
 
   return (
-    <MapContainer
-      key={key}
-      center={center}
-      zoom={zoom}
-      className="w-full h-full  z-1"
-      zoomControl={false}
-      attributionControl={false}
-      doubleClickZoom={doubleClickZoom}
-      scrollWheelZoom={scrollWheelZoom}
-      maxZoom={50}
-      ref={mapRef}
-    >
-      {children}
-
-      <MapHandleFlyTo flyTo={flyTo} />
-      {setCenter && <MapHandleCenter setCenter={setCenter} />}
-      {setLocationName && (
-        <MapHandleLocationName
-          setLocationName={setLocationName}
-          returnAllData={locationReturnAll}
+    <>
+      {tileV1 && (
+        <MapLayerControl
+          selectedLayer={selectedLayer}
+          handleOnSelect={handleLayer}
         />
       )}
-      <LayersControl position="topleft">
-        {LAYER_ITEMS.map((item) => {
-          return (
-            <LayersControl.BaseLayer
-              checked={item?.checked}
-              key={item.name}
-              name={item.name}
-            >
-              <TileLayer attribution={item.attribution} url={item.url} />
-            </LayersControl.BaseLayer>
-          );
-        })}
-      </LayersControl>
 
-      {showCenterMarker && (
-        <img
-          src={icon}
-          alt="marker"
-          height="40"
-          width="40"
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            marginTop: "-30px",
-            zIndex: 999,
-          }}
+      <MapContainer
+        key={key}
+        center={center}
+        zoom={zoom}
+        className="w-full h-full  z-1"
+        zoomControl={false}
+        attributionControl={false}
+        doubleClickZoom={doubleClickZoom}
+        scrollWheelZoom={scrollWheelZoom}
+        maxZoom={50}
+        ref={mapRef}
+      >
+        <TileLayer
+          attribution={selectedLayer.attribution}
+          url={selectedLayer.url}
         />
-      )}
-    </MapContainer>
+
+        {children}
+
+        <MapHandleFlyTo flyTo={flyTo} />
+        {setCenter && <MapHandleCenter setCenter={setCenter} />}
+
+        {tileV2 && <MapLayerControlV2 />}
+
+        {showCenterMarker && (
+          <img
+            src={icon}
+            alt="marker"
+            height="40"
+            width="40"
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              marginTop: "-30px",
+              zIndex: 999,
+            }}
+          />
+        )}
+      </MapContainer>
+    </>
   );
 };
 

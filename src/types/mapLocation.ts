@@ -1,6 +1,4 @@
-import { LatLng } from "leaflet";
-
-export type MapLocationRequest = LatLng | undefined;
+export type MapLocationRequest = number[];
 
 export interface MapLocationResponse {
   place_id: number;

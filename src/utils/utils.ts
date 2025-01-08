@@ -1,4 +1,4 @@
-import { LatLngExpression } from "leaflet";
+import { LatLng, LatLngExpression } from "leaflet";
 import { MapRoutesResponse } from "../types";
 
 export const deepCopy = <T>(obj: T): T => {
@@ -17,10 +17,14 @@ export const deepCopy = <T>(obj: T): T => {
   return copy;
 };
 
+export const findDistance = (distance: number = 0) => {
+  return Math.round(distance / 1000);
+};
+
 export const reformatRoutes = (
   routes: MapRoutesResponse[]
 ): MapRoutesResponse[] => {
-  return deepCopy(routes).map((item) => ({
+  return deepCopy(routes)?.map((item) => ({
     ...item,
     legs: [
       {
@@ -55,7 +59,7 @@ export const findPolyLineData = (
     .flat() as LatLngExpression[];
 };
 
-export const renderDuration = (time: number): string => {
+export const renderDuration = (time: number = 0): string => {
   const h = Math.floor(time / 3600);
   time = time - h * 3600;
   const m = Math.floor(time / 60);
@@ -97,4 +101,13 @@ export const reverseCoordinates = (val: LatLngExpression): LatLngExpression => {
     .split(",")
     .map((item) => Number(item))
     .reverse() as LatLngExpression;
+};
+
+export const latLngToString = (val: LatLng): string => {
+  return `${val.lat},${val.lng}`;
+};
+
+export const stringToLatLng = (val: string): LatLng => {
+  const arr = val.split(",");
+  return { lat: Number(arr[0]), lng: Number(arr[1]) } as LatLng;
 };

@@ -1,4 +1,6 @@
-export const LAYER_ITEMS = [
+import { MapLayerType } from "../types";
+
+export const LAYER_ITEMS: MapLayerType[] = [
   {
     name: "Osm",
     url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
