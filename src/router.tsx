@@ -31,7 +31,7 @@ export const router = createBrowserRouter([
       },
       {
         element: lazyLoadRoutes("freeMap"),
-        path: "free",
+        path: "/free",
       },
     ],
   },
