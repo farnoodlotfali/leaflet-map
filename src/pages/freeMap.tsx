@@ -14,6 +14,7 @@ import { enToFaNumber, reformatRoutes } from "../utils/utils";
 import RoutingPath from "../components/RoutingPath";
 import { useMapContext } from "../hooks/useMapContext";
 import InfoItem from "../components/InfoItem";
+import { Link } from "react-router";
 
 const MapWrapper = lazy(() => import("../components/map/MapWrapper"));
 
@@ -209,6 +210,7 @@ const FreeMap = () => {
             />
           </div>
         )}
+          <Link to="/">21212</Link>
 
         <button
           className={` p-1  border-2 rounded-lg mt-2 h-12 w-full focus:shadow-md hover:opacity-85 border-red-700 text-red-600`}
