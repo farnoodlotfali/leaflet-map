@@ -27,10 +27,10 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: lazyLoadRoutes("freeMap"),
+        element: lazyLoadRoutes("limitMap"),
       },
       {
-        element: lazyLoadRoutes("limitMap"),
+        element: lazyLoadRoutes("freeMap"),
         path: "/free",
       },
     ],
