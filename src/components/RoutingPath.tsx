@@ -1,6 +1,6 @@
 import { Marker, Polyline, Tooltip } from "react-leaflet";
 import { useMapContext } from "../hooks/useMapContext";
-import { greenMarker, redMarker } from "../utils/markers";
+import { blueMarker, redMarker } from "../utils/markers";
 import { findPolyLineData } from "../utils/utils";
 import { Fragment } from "react";
 
@@ -19,7 +19,7 @@ const RoutingPath = () => {
               return (
                 <Fragment key={i}>
                   {/* start marker */}
-                  <Marker position={polyLineData[0]} icon={greenMarker}>
+                  <Marker position={polyLineData[0]} icon={blueMarker}>
                     <Tooltip permanent>
                       <h3>مبدا</h3>
                     </Tooltip>
@@ -28,7 +28,7 @@ const RoutingPath = () => {
                   {/* path */}
                   <Polyline
                     positions={polyLineData}
-                    pathOptions={{ weight: 5, color: "lime" }}
+                    pathOptions={{ weight: 5, color: "#008000" }}
                   />
                   {/* end marker */}
                   <Marker

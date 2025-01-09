@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: "IRANSansXV";
-  src: local("IRANSansXV"), url(/fonts/IRANSansXV.woff2) format("woff2");
+  src: local("IRANSansXV"), url(./assets/fonts/IRANSansXV.woff2) format("woff2");
 }
 
 * {

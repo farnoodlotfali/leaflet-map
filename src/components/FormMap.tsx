@@ -114,7 +114,7 @@ const FormMap = () => {
         className={` p-1 text-white border-2 rounded-lg  h-10 w-full focus:shadow-md hover:opacity-85  ${
           Object.keys(errors).length
             ? "bg-red-700 pointer-events-none select-none opacity-65"
-            : "bg-purple-700 disabled:bg-gray-400"
+            : "bg-primary-700 disabled:bg-gray-400"
         }`}
         disabled={isFetching || !!Object.keys(errors).length}
         type="submit"
@@ -123,7 +123,7 @@ const FormMap = () => {
       </button>
       <div className="flex gap-2">
         <button
-          className="p-1 text-purple-700 border-2 rounded-lg  h-10 w-1/2 focus:shadow-md hover:opacity-75 border-purple-700 disabled:border-gray-300 disabled:text-gray-300 disabled:opacity-100"
+          className="p-1 text-secondary-800 border-2 rounded-lg  h-10 w-1/2 focus:shadow-md hover:opacity-75 border-secondary-800 disabled:border-gray-300 disabled:text-gray-300 disabled:opacity-100"
           type="button"
           onClick={() => handleReverse()}
           disabled={!coordinates.destination}

@@ -95,13 +95,30 @@ export const enToFaNumber = (number: string | number): string | null => {
   return result;
 };
 
-export const reverseCoordinates = (val: LatLngExpression): LatLngExpression => {
+export const reverseCoordinates = (
+  val: LatLngExpression | string
+): LatLngExpression => {
   return val
     .toString()
     .split(",")
     .map((item) => Number(item))
     .reverse() as LatLngExpression;
 };
+
+export const reverseNumbers = (val: string): string => {
+  return val
+    .split(",")
+    .map((item) => Number(item))
+    .reverse()
+    .toString();
+};
+
+export const stringToNumbers = (val: string): LatLngExpression=> {
+  return val
+    .split(",")
+    .map((item) => Number(item)) as LatLngExpression; 
+};
+
 
 export const latLngToString = (val: LatLng): string => {
   return `${val.lat},${val.lng}`;

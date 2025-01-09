@@ -12,7 +12,7 @@ const BlankLayout = () => {
         {!show ? "show" : "hide"}
       </button>
       <div
-        className={`fixed w-32 bg-purple-200 p-2 shadow-xl h-dvh top-0 bottom-0 z-50 transition-all duration-700 ease-in-out ${
+        className={`fixed w-32 bg-primary-50 p-2 shadow-xl h-dvh top-0 bottom-0 z-50 transition-all duration-700 ease-in-out ${
           show ? "right-0" : "right-[-50%]"
         }`}
       >

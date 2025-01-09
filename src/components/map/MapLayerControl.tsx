@@ -20,7 +20,7 @@ const MapLayerControl: React.FC<MapLayerControlProps> = ({
     <>
       <button
         onClick={toggleModal}
-        className="text-purple-600 bg-white p-1 rounded-lg border-purple-400 border-2 absolute top-1 left-1 z-10"
+        className="text-primary-700 bg-white p-1 rounded-lg border-primary-700 border-2 absolute top-1 left-1 z-10"
       >
         <Layer size="32" color="currentcolor" variant="Broken" />
       </button>
@@ -37,8 +37,8 @@ const MapLayerControl: React.FC<MapLayerControlProps> = ({
                 }}
                 className={`border-2 p-2 rounded-lg hover:opacity-75 shadow-md flex justify-between items-center ${
                   isSelect
-                    ? "border-purple-600 bg-purple-200  text-purple-600"
-                    : "border-stone-600 text-stone-500"
+                    ? "border-primary-700 bg-primary-700  text-white"
+                    : "border-secondary-800 text-secondary-800"
                 }`}
                 role="button"
               >

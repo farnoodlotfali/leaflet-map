@@ -11,7 +11,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [51.389, 35.6892],
+        coordinates: [35.6892, 51.389],
       },
     },
     {
@@ -22,7 +22,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [59.6111, 36.3094],
+        coordinates: [36.3094, 59.6111],
       },
     },
     {
@@ -33,7 +33,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [51.6675, 32.6539],
+        coordinates: [32.6539, 51.6675],
       },
     },
     {
@@ -44,7 +44,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [52.5837, 29.5918],
+        coordinates: [29.5918, 52.5837],
       },
     },
     {
@@ -55,7 +55,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [46.2919, 38.08],
+        coordinates: [38.08, 46.2919],
       },
     },
     {
@@ -66,7 +66,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [50.9915, 35.8355],
+        coordinates: [35.8355, 50.9915],
       },
     },
     {
@@ -77,7 +77,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [48.6691, 31.3183],
+        coordinates: [31.3183, 48.6691],
       },
     },
     {
@@ -88,7 +88,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [50.8764, 34.6399],
+        coordinates: [34.6399, 50.8764],
       },
     },
     {
@@ -99,7 +99,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [47.061, 34.3142],
+        coordinates: [34.3142, 47.061],
       },
     },
     {
@@ -110,7 +110,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [49.5832, 37.2808],
+        coordinates: [37.2808, 49.5832],
       },
     },
     {
@@ -121,7 +121,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [60.872, 29.4963],
+        coordinates: [29.4963, 60.872],
       },
     },
     {
@@ -132,7 +132,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [54.3675, 31.8974],
+        coordinates: [31.8974, 54.3675],
       },
     },
     {
@@ -143,7 +143,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [57.072, 30.2839],
+        coordinates: [30.2839, 57.072],
       },
     },
     {
@@ -154,7 +154,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [45.0725, 37.5527],
+        coordinates: [37.5527, 45.0725],
       },
     },
     {
@@ -165,7 +165,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [47.0136, 35.3099],
+        coordinates: [35.3099, 47.0136],
       },
     },
     {
@@ -176,7 +176,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [56.2721, 27.1865],
+        coordinates: [27.1865, 56.2721],
       },
     },
     {
@@ -187,7 +187,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [48.4787, 36.6765],
+        coordinates: [36.6765, 48.4787],
       },
     },
     {
@@ -198,7 +198,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [48.5146, 34.798],
+        coordinates: [34.798, 48.5146],
       },
     },
     {
@@ -209,7 +209,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [49.6891, 34.0917],
+        coordinates: [34.0917, 49.6891],
       },
     },
     {
@@ -220,7 +220,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [48.2933, 38.2498],
+        coordinates: [38.2498, 48.2933],
       },
     },
     {
@@ -231,7 +231,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [54.4374, 36.8416],
+        coordinates: [36.8416, 54.4374],
       },
     },
     {
@@ -242,7 +242,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [48.3547, 33.4878],
+        coordinates: [33.4878, 48.3547],
       },
     },
     {
@@ -253,7 +253,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [59.2211, 32.8647],
+        coordinates: [32.8647, 59.2211],
       },
     },
     {
@@ -264,7 +264,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [57.3217, 37.4747],
+        coordinates: [37.4747, 57.3217],
       },
     },
     {
@@ -275,7 +275,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [50.8385, 28.9234],
+        coordinates: [28.9234, 50.8385],
       },
     },
     {
@@ -286,7 +286,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [50.0039, 36.2688],
+        coordinates: [36.2688, 50.0039],
       },
     },
     {
@@ -297,7 +297,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [53.3931, 35.5775],
+        coordinates: [35.5775, 53.3931],
       },
     },
     {
@@ -308,7 +308,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [53.0601, 36.5633],
+        coordinates: [36.5633, 53.0601],
       },
     },
     {
@@ -319,7 +319,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [46.4224, 33.637],
+        coordinates: [33.637, 46.4224],
       },
     },
     {
@@ -330,7 +330,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [51.5876, 30.6684],
+        coordinates: [30.6684, 51.5876],
       },
     },
     {
@@ -341,7 +341,7 @@ export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
       },
       geometry: {
         type: "Point",
-        coordinates: [50.8594, 32.3256],
+        coordinates: [32.3256, 50.8594],
       },
     },
   ],

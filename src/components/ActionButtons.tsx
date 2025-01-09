@@ -25,7 +25,7 @@ const Button: React.FC<ButtonProps> = ({
     <div
       onClick={handleOnClick}
       className={`bg-white  p-2 rounded-lg  cursor-pointer transition-all hover:scale-105 ${
-        active ? "text-purple-500" : " text-stone-300 hover:text-purple-500"
+        active ? "text-primary-700" : " text-stone-300 hover:text-primary-700"
       }`}
       title={title}
     >

@@ -2,9 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import { useMap, Marker, Tooltip, Polygon } from "react-leaflet";
 import { IRAN_CITY_ITEMS } from "../data/iran-city";
 import { CITY_CENTER_POINTS } from "../data/city-center";
-import { reverseCoordinates } from "../utils/utils";
 import { useMapContext } from "../hooks/useMapContext";
-import { blueMarker } from "../utils/markers";
+import { yellowMarker } from "../utils/markers";
 
 const MapHandel = () => {
   const { showCityCenter, showCityLine } = useMapContext();
@@ -35,11 +34,12 @@ const MapHandel = () => {
               click: () => {
                 setShowCenter(true);
                 setName("");
+
                 map.flyTo(item.geometry.coordinates, 13);
               },
             }}
-            position={reverseCoordinates(item.geometry.coordinates)}
-            icon={blueMarker}
+            position={item.geometry.coordinates}
+            icon={yellowMarker}
           >
             <Tooltip>
               <h3>{item.properties.fa_name}</h3>
@@ -58,9 +58,9 @@ const MapHandel = () => {
             <Polygon
               key={item.properties.name}
               pathOptions={{
-                color: "purple",
+                color: "#800080",
                 fillColor:
-                  name === item.properties.name ? "#cb53cb" : "transparent",
+                  name === item.properties.name ? "#800080" : "transparent",
                 weight: 1,
                 fillOpacity: name === item.properties.name ? 0.2 : 0,
               }}

@@ -17,7 +17,7 @@ import {
 import MapHandleFlyTo from "./MapHandleFlyTo";
 import MapHandleCenter from "./MapHandleCenter";
 import { blueMarker } from "../../utils/markers";
-import icon from "../../assets/img/marker-purple.svg";
+import icon from "../../assets/img/marker-primary.svg";
 import { LAYER_ITEMS } from "../../data/map-layers";
 
 import MapLayerControl from "./MapLayerControl";
