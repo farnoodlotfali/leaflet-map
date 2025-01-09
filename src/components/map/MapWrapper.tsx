@@ -2,8 +2,8 @@ import "leaflet-rotatedmarker";
 import "leaflet/dist/leaflet.css";
 
 import { PropsWithChildren, useRef, useState } from "react";
-import { MapContainer, TileLayer } from "react-leaflet";
-import L from "leaflet";
+import { MapContainer, TileLayer, useMapEvents } from "react-leaflet";
+import L, { LatLng } from "leaflet";
 
 import {
   DEFAULT_CENTER,
@@ -15,7 +15,6 @@ import {
 // we can rotate icon or marker with this package
 
 import MapHandleFlyTo from "./MapHandleFlyTo";
-import MapHandleCenter from "./MapHandleCenter";
 import { blueMarker } from "../../utils/markers";
 import icon from "../../assets/img/marker-primary.svg";
 import { LAYER_ITEMS } from "../../data/map-layers";
@@ -103,7 +102,11 @@ const MapWrapper: React.FC<PropsWithChildren<MapWrapperProps>> = ({
         {children}
 
         <MapHandleFlyTo flyTo={flyTo} />
-        {setCenter && <MapHandleCenter setCenter={setCenter} />}
+        <MapHandleCenter
+          onMoveEnd={(value) => {
+            setCenter([value.lat, value.lng]);
+          }}
+        />
 
         {tileV2 && <MapLayerControlV2 />}
 
@@ -128,4 +131,17 @@ const MapWrapper: React.FC<PropsWithChildren<MapWrapperProps>> = ({
   );
 };
 
+const MapHandleCenter = ({
+  onMoveEnd,
+}: {
+  onMoveEnd: (val: LatLng) => void;
+}) => {
+  const mapEvents = useMapEvents({
+    moveend() {
+      onMoveEnd(mapEvents.getCenter());
+    },
+  });
+
+  return <></>;
+};
 export default MapWrapper;

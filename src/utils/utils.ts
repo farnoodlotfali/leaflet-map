@@ -113,12 +113,9 @@ export const reverseNumbers = (val: string): string => {
     .toString();
 };
 
-export const stringToNumbers = (val: string): LatLngExpression=> {
-  return val
-    .split(",")
-    .map((item) => Number(item)) as LatLngExpression; 
+export const stringToNumbers = <T>(val: string): T => {
+  return val.split(",").map((item) => Number(item)) as T;
 };
-
 
 export const latLngToString = (val: LatLng): string => {
   return `${val.lat},${val.lng}`;

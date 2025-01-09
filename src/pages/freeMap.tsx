@@ -15,12 +15,15 @@ import RoutingPath from "../components/RoutingPath";
 import { useMapContext } from "../hooks/useMapContext";
 import InfoItem from "../components/InfoItem";
 import { blueMarker, redMarker } from "../utils/markers";
+import { useNavigate } from "react-router";
 
 const MapWrapper = lazy(() => import("../components/map/MapWrapper"));
 
 const STEPS_TITLE = ["مبدا", "مقصد", "نوع پیمایش"];
 
 const FreeMap = () => {
+  const navigate = useNavigate();
+
   const { handleSetRoutes, distance, duration } = useMapContext();
 
   const [coordinates, setCoordinates] = useQueryStates(
@@ -35,18 +38,26 @@ const FreeMap = () => {
     }
   );
   const [method, setMethod] = useState(
-    METHOD_NAME_ITEMS.find((item) => item.value === coordinates.method) ?? METHOD_NAME_ITEMS[0]
+    METHOD_NAME_ITEMS.find((item) => item.value === coordinates.method) ??
+      METHOD_NAME_ITEMS[0]
   );
   const [center, setCenter] = useState(DEFAULT_CENTER);
 
-  const { data, isFetching }: UseQueryResult<ResponseType2<MapLocationResponse>, Error> = useMapLocation(
+  const {
+    data,
+    isFetching,
+  }: UseQueryResult<ResponseType2<MapLocationResponse>, Error> = useMapLocation(
     center,
     {
       enabled: !!center && coordinates.step !== 2,
     }
   );
 
-  const { data: allRoutes, isFetching: routeIsFetching, isSuccess }: UseQueryResult<ResponseType<MapRoutesResponse>, Error> = useMapRoute(
+  const {
+    data: allRoutes,
+    isFetching: routeIsFetching,
+    isSuccess,
+  }: UseQueryResult<ResponseType<MapRoutesResponse>, Error> = useMapRoute(
     coordinates,
     {
       enabled: !!coordinates.method,
@@ -75,55 +86,10 @@ const FreeMap = () => {
         });
         break;
       case 2:
-        setCoordinates(
-          {
-            method: method.value,
-            step: 3,
-          },
-          {
-            history: "replace",
-          }
-        );
-        break;
-      default:
-        break;
-    }
-  };
-
-  const handleBack = () => {
-    switch (coordinates.step) {
-      case 3:
-        setCoordinates(
-          {
-            method: "",
-            step: 2,
-          },
-          {
-            history: "replace",
-          }
-        );
-        break;
-      case 2:
-        setCoordinates(
-          {
-            destination: "",
-            step: 1,
-          },
-          {
-            history: "replace",
-          }
-        );
-        break;
-      case 1:
-        setCoordinates(
-          {
-            startLocation: "",
-            step: 0,
-          },
-          {
-            history: "replace",
-          }
-        );
+        setCoordinates({
+          method: method.value,
+          step: 3,
+        });
         break;
       default:
         break;
@@ -144,14 +110,18 @@ const FreeMap = () => {
           <>
             {coordinates.step === 2 ? (
               <>
-                <div className="text-lg text-center mb-4">نوع پیمایش را انتخاب کنید</div>
+                <div className="text-lg text-center mb-4">
+                  نوع پیمایش را انتخاب کنید
+                </div>
                 <div className="flex gap-4 text-4xl justify-center mb-3">
                   {METHOD_NAME_ITEMS.map((item) => (
                     <div
                       key={item.value}
                       role="button"
                       className={`border-2 p-2 rounded-lg hover:opacity-75 text-lg ${
-                        item.value === method.value ? "border-primary-700 bg-primary-50 text-primary-700" : "border-secondary-800 text-secondary-800"
+                        item.value === method.value
+                          ? "border-primary-700 bg-primary-50 text-primary-700"
+                          : "border-secondary-800 text-secondary-800"
                       }`}
                       onClick={() => setMethod(item)}
                     >
@@ -162,7 +132,11 @@ const FreeMap = () => {
               </>
             ) : (
               <div className="border-2 rounded-lg p-2 h-11 truncate">
-                {isFetching ? <span className="text-gray-400">یافتن مسیر...</span> : data?.display_name}
+                {isFetching ? (
+                  <span className="text-gray-400">یافتن مسیر...</span>
+                ) : (
+                  data?.display_name
+                )}
               </div>
             )}
             <button
@@ -170,19 +144,27 @@ const FreeMap = () => {
               disabled={isFetching}
               onClick={handleClick}
             >
-              {isFetching ? <Spinner /> : `ثبت ${STEPS_TITLE[coordinates.step]}`}
+              {isFetching ? (
+                <Spinner />
+              ) : (
+                `ثبت ${STEPS_TITLE[coordinates.step]}`
+              )}
             </button>
           </>
         ) : (
           <div className="flex flex-col gap-3">
             <InfoItem title="نوع پیمایش" value={method.title} />
             <InfoItem title="زمان" value={enToFaNumber(duration)} />
-            <InfoItem title="مسافت" value={enToFaNumber(distance)} postfix="کیلومتر" />
+            <InfoItem
+              title="مسافت"
+              value={enToFaNumber(distance)}
+              postfix="کیلومتر"
+            />
           </div>
         )}
         <button
           className={`p-1 border-2 rounded-lg mt-2 h-12 w-full focus:shadow-md hover:opacity-85 border-red-700 text-red-600`}
-          onClick={handleBack}
+          onClick={() => navigate(-1)}
         >
           بازگشت
         </button>
@@ -200,14 +182,20 @@ const FreeMap = () => {
           {!allRoutes && (
             <>
               {coordinates?.startLocation && (
-                <Marker position={stringToLatLng(coordinates.startLocation)} icon={blueMarker}>
+                <Marker
+                  position={stringToLatLng(coordinates.startLocation)}
+                  icon={blueMarker}
+                >
                   <Tooltip permanent>
                     <h3>مبدا</h3>
                   </Tooltip>
                 </Marker>
               )}
               {coordinates?.destination && (
-                <Marker position={stringToLatLng(coordinates.destination)} icon={redMarker}>
+                <Marker
+                  position={stringToLatLng(coordinates.destination)}
+                  icon={redMarker}
+                >
                   <Tooltip permanent>
                     <h3>مقصد</h3>
                   </Tooltip>
