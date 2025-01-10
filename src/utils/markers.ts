@@ -3,6 +3,7 @@ import blueMarkerIcon from "../assets/img/marker-blue.svg";
 import greenMarkerIcon from "../assets/img/marker-green.svg";
 import redMarkerIcon from "../assets/img/marker-red.svg";
 import yellowMarkerIcon from "../assets/img/marker-yellow.svg";
+import circlePrimaryMarkerIcon from "../assets/img/circle_arrow_up_primary.svg";
 import blueSkyMarkerIcon from "../assets/img/marker-blue-sky.svg";
 
 export const blueMarker = L.icon({
@@ -29,6 +30,11 @@ export const blueSkyMarker = L.icon({
 
 export const yellowMarker = L.icon({
   iconUrl: yellowMarkerIcon,
+  iconSize: [32, 32],
+  iconAnchor: [16, 32],
+});
+export const circleGreenMarker = L.icon({
+  iconUrl: circlePrimaryMarkerIcon,
   iconSize: [32, 32],
   iconAnchor: [16, 32],
 });

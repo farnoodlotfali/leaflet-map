@@ -62,7 +62,7 @@ const MapArrowArc: React.FC<MapArrowArcProps> = ({ point1, point2 }) => {
       arr_shadow.map((latLng) => [latLng[1], latLng[0]])
     );
 
-    const curved = bezierSpline(line, { sharpness: 1, resolution: 20000 });
+    const curved = bezierSpline(line, { sharpness: 1, resolution: 20000, });
     const curved_shadow = bezierSpline(line_shadow, {
       sharpness: 1,
       resolution: 20000,

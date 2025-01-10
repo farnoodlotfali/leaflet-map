@@ -8,7 +8,6 @@ import { enToFaNumber } from "../utils/utils";
 import { ZoomControl } from "react-leaflet";
 import MapHandel from "../components/MapHandel";
 import RoutingPath from "../components/RoutingPath";
-import { Link } from "react-router";
 
 const MapWrapper = lazy(() => import("../components/map/MapWrapper"));
 
@@ -30,7 +29,6 @@ const LimitMap = () => {
             value={enToFaNumber(distance)}
             postfix="کیلومتر"
           />
-          <Link to="/free">21212</Link>
         </div>
       </div>
 
@@ -40,6 +38,7 @@ const LimitMap = () => {
           doubleClickZoom={true}
           scrollWheelZoom={true}
           tileV1={true}
+          showCenterMarker={false}
         >
           <ZoomControl position="bottomright" />
 

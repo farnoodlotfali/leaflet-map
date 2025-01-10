@@ -102,11 +102,13 @@ const MapWrapper: React.FC<PropsWithChildren<MapWrapperProps>> = ({
         {children}
 
         <MapHandleFlyTo flyTo={flyTo} />
-        <MapHandleCenter
-          onMoveEnd={(value) => {
-            setCenter([value.lat, value.lng]);
-          }}
-        />
+        {setCenter && (
+          <MapHandleCenter
+            onMoveEnd={(value) => {
+              setCenter([value.lat, value.lng]);
+            }}
+          />
+        )}
 
         {tileV2 && <MapLayerControlV2 />}
 

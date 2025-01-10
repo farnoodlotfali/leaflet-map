@@ -22,6 +22,7 @@ const lazyLoadRoutes = (componentName: string, src = "pages") => {
 
 export const router = createBrowserRouter([
   {
+    element: lazyLoadRoutes("BlankLayout", "layouts"),
     path: "/",
     errorElement: <ErrorElement />,
     children: [
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
       {
         element: lazyLoadRoutes("freeMapCurve"),
         path: "/free-curve",
+      },
+      {
+        element: lazyLoadRoutes("clusterMap"),
+        path: "/cluster",
       },
     ],
   },
