@@ -1,7 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import Spinner from "../components/Spinner";
 import { Marker, Tooltip, ZoomControl } from "react-leaflet";
-import ExampleClusterGroup from "../components/map/ExampleClusterGroup";
 import { parseAsInteger, parseAsString, useQueryStates } from "nuqs";
 import { useMapLocation } from "../hooks/useMapLocation";
 import { METHOD_NAME_ITEMS } from "../data/route-method";
@@ -15,15 +14,12 @@ import RoutingPath from "../components/RoutingPath";
 import { useMapContext } from "../hooks/useMapContext";
 import InfoItem from "../components/InfoItem";
 import { blueMarker, redMarker } from "../utils/markers";
-import { useNavigate } from "react-router";
 
 const MapWrapper = lazy(() => import("../components/map/MapWrapper"));
 
 const STEPS_TITLE = ["مبدا", "مقصد", "نوع پیمایش"];
 
 const FreeMap = () => {
-  const navigate = useNavigate();
-
   const { handleSetRoutes, distance, duration } = useMapContext();
 
   const [coordinates, setCoordinates] = useQueryStates(
@@ -86,10 +82,55 @@ const FreeMap = () => {
         });
         break;
       case 2:
-        setCoordinates({
-          method: method.value,
-          step: 3,
-        });
+        setCoordinates(
+          {
+            method: method.value,
+            step: 3,
+          },
+          {
+            history: "replace",
+          }
+        );
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleBack = () => {
+    switch (coordinates.step) {
+      case 3:
+        setCoordinates(
+          {
+            method: "",
+            step: 2,
+          },
+          {
+            history: "replace",
+          }
+        );
+        break;
+      case 2:
+        setCoordinates(
+          {
+            destination: "",
+            step: 1,
+          },
+          {
+            history: "replace",
+          }
+        );
+        break;
+      case 1:
+        setCoordinates(
+          {
+            startLocation: "",
+            step: 0,
+          },
+          {
+            history: "replace",
+          }
+        );
         break;
       default:
         break;
@@ -164,7 +205,7 @@ const FreeMap = () => {
         )}
         <button
           className={`p-1 border-2 rounded-lg mt-2 h-12 w-full focus:shadow-md hover:opacity-85 border-red-700 text-red-600`}
-          onClick={() => navigate(-1)}
+          onClick={handleBack}
         >
           بازگشت
         </button>
@@ -204,7 +245,6 @@ const FreeMap = () => {
             </>
           )}
           <ZoomControl position="bottomright" />
-          <ExampleClusterGroup />
           {coordinates.step > 2 && <RoutingPath />}
         </MapWrapper>
       </Suspense>
