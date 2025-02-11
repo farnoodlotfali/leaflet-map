@@ -24,6 +24,7 @@ export interface MapRoutesResponse {
       };
       mode: string;
       name: string;
+      rotary_name?: string;
       weight: number;
       maneuver: {
         bearing_after: number;

@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import Spinner from "../components/Spinner";
-import { Marker, Tooltip, ZoomControl } from "react-leaflet";
+import { Marker, Tooltip, useMap, ZoomControl } from "react-leaflet";
 import { parseAsInteger, parseAsString, useQueryStates } from "nuqs";
 import { useMapLocation } from "../hooks/useMapLocation";
 import { METHOD_NAME_ITEMS } from "../data/route-method";
@@ -14,12 +14,148 @@ import RoutingPath from "../components/RoutingPath";
 import { useMapContext } from "../hooks/useMapContext";
 import InfoItem from "../components/InfoItem";
 import { blueMarker, redMarker } from "../utils/markers";
+import { useNavigate } from "react-router";
+import L, { PathOptions } from "leaflet";
+import "leaflet-routing-machine";
+import { createControlComponent } from "@react-leaflet/core";
+import { boolean } from "zod";
 
 const MapWrapper = lazy(() => import("../components/map/MapWrapper"));
 
 const STEPS_TITLE = ["مبدا", "مقصد", "نوع پیمایش"];
 
+const directions: any = {
+  "new name-straight": "ادامه دهید",
+
+  "new name-slight right": "کمی به سمت راست ادامه دهید",
+  "new name-slight left": "کمی به سمت چپ ادامه دهید",
+
+  "new name-right": "به سمت راست ادامه دهید",
+  "new name-left": "به سمت چپ ادامه دهید",
+
+  "end of road-left": "به سمت چپ بپیچید",
+  "end of road-right": "به سمت راست بپیچید",
+
+  "turn-right": "به سمت راست بپیچید",
+  "turn-left": "به سمت چپ بپیچید",
+  "turn-straight": "ادامه دهید",
+
+  "rotary-right": "میدان را دور بزنید",
+  "rotary-straight": "میدان را دور بزنید",
+  "rotary-left": "میدان را دور بزنید",
+
+  "exit rotary-right": "به سمت راست بروید و از میدان خارج شوید",
+  "exit rotary-left": "به سمت چپ بروید و از میدان خارج شوید",
+  "exit rotary-straight": "از میدان خارج شوید",
+
+  "fork-slight left": "سمت چپ ادامه دهید",
+  "fork-slight right": "سمت راست ادامه دهید",
+
+  "merge-slight left": "سمت چپ ادامه دهید",
+  "merge-slight right": "سمت راست ادامه دهید",
+
+  "exit roundabout-slight right": "سمت راست، خروجی دوربرگردان",
+  "exit roundabout-slight left": "سمت چپ خروجی دوربرگردان",
+  "exit roundabout-straight": "خروجی دوربرگردان",
+  "exit roundabout-right": "خروجی دوربرگردان",
+  "exit roundabout-left": "خروجی دوربرگردان",
+
+  "roundabout-straight": "خروجی دوربرگردان",
+  "roundabout-slight right": "خروجی دوربرگردان",
+  "roundabout-slight left": "خروجی دوربرگردان",
+  "roundabout-left": "خروجی دوربرگردان",
+  "roundabout-right": "خروجی دوربرگردان",
+
+  "continue-uturn": "دور بزنید",
+  "continue-straight": "ادامه دهید",
+  "continue-left": "ادامه دهید",
+  "continue-right": "ادامه دهید",
+
+  "turn-slight right": "به راست بپیچید",
+  "turn-slight left": "به چپ بپیچید",
+
+  "on ramp-slight right": "از رمپ سمت راست به سمت بالا بروید",
+  "on ramp-slight left": "از رمپ سمت چپ به سمت بالا بروید",
+
+  "off ramp-slight right": "از رمپ سمت راست به سمت بالا بروید",
+  "off ramp-slight left": "از رمپ سمت چپ به سمت بالا بروید",
+
+  "turn-sharp right": "به راست بپیچید",
+  "turn-sharp left": "به چپ بپیچید",
+
+  "depart-": "شروع کن",
+  "depart-straight": "شروع کن",
+  "depart-left": "شروع کن",
+  "depart-right": "شروع کن",
+
+  "arrive-right": "رسیدید",
+  "arrive-left": "رسیدید",
+  "arrive-straight": "رسیدید",
+  "arrive-": "رسیدید",
+};
+
+const createRoutineMachineLayer = (props: any) => {
+  const instance = L.Routing.control({
+    waypoints: [L.latLng(35.6892, 51.389), L.latLng(32.667125, 51.679688)],
+    lineOptions: {
+      styles: [{ color: "#f0f", weight: 9 }],
+      extendToWaypoints: false,
+      missingRouteTolerance: 1,
+    },
+    show: false,
+    addWaypoints: false,
+    routeWhileDragging: true,
+    // draggableWaypoints: false,
+    fitSelectedRoutes: true,
+    showAlternatives: true,
+    // waypointMode: "snap",
+    collapsible: false,
+    router: new L.Routing.OSRMv1({
+      serviceUrl: "https://routing.openstreetmap.de/routed-car/route/v1",
+    }),
+    containerClassName: "bg-red-500 overflow-y-scroll max-h-screen !m-0 ",
+    useZoomParameter: true,
+    altLineOptions: {
+      styles: [
+        {
+          weight: 4,
+          color: "gray",
+          dashArray: "3, 8",
+          lineCap: "square",
+          lineJoin: "miter",
+        },
+        {
+          weight: 12,
+          color: "red",
+          lineCap: "square",
+          lineJoin: "miter",
+          opacity: 0.2,
+        },
+      ],
+      extendToWaypoints: false,
+      missingRouteTolerance: 0,
+    },
+    autoRoute: true,
+    waypointMode: "connect",
+    // pointMarkerStyle: {
+    //   color: "red",
+    // },
+    // createMarker: function (i, wp, er) {
+    //   return null;
+    // },
+    // language: 'it',
+    
+  });
+
+  console.log(instance);
+
+  return instance;
+};
+
+const RoutingMachine = createControlComponent(createRoutineMachineLayer);
+
 const FreeMap = () => {
+  const navigate = useNavigate();
   const { handleSetRoutes, distance, duration } = useMapContext();
 
   const [coordinates, setCoordinates] = useQueryStates(
@@ -39,32 +175,66 @@ const FreeMap = () => {
   );
   const [center, setCenter] = useState(DEFAULT_CENTER);
 
-  const {
-    data,
-    isFetching,
-  }: UseQueryResult<ResponseType2<MapLocationResponse>, Error> = useMapLocation(
-    center,
-    {
-      enabled: !!center && coordinates.step !== 2,
-    }
-  );
+  // const {
+  //   data,
+  //   isFetching,
+  // }: UseQueryResult<ResponseType2<MapLocationResponse>, Error> = useMapLocation(
+  //   center,
+  //   {
+  //     enabled: !!center && coordinates.step !== 2,
+  //   }
+  // );
 
-  const {
-    data: allRoutes,
-    isFetching: routeIsFetching,
-    isSuccess,
-  }: UseQueryResult<ResponseType<MapRoutesResponse>, Error> = useMapRoute(
-    coordinates,
-    {
-      enabled: !!coordinates.method,
-    }
-  );
+  // const {
+  //   data: allRoutes,
+  //   isFetching: routeIsFetching,
+  //   isSuccess,
+  // }: UseQueryResult<ResponseType<MapRoutesResponse>, Error> = useMapRoute(
+  //   coordinates,
+  //   {
+  //     enabled: !!coordinates.method,
+  //   }
+  // );
 
-  useEffect(() => {
-    if (isSuccess && allRoutes) {
-      handleSetRoutes(reformatRoutes(allRoutes.routes));
-    }
-  }, [isSuccess, allRoutes]);
+  // useEffect(() => {
+  //   if (isSuccess && allRoutes) {
+  //     // handleSetRoutes(reformatRoutes(allRoutes.routes));
+  //   }
+  // }, [isSuccess, allRoutes]);
+
+  // useEffect(() => {
+  //   allRoutes?.routes[0].legs[0].steps.map((x) => {
+  //     // console.log(`${x.maneuver.type ?? ""}-${x.maneuver.modifier ?? ""}`);
+  //     // console.log({
+  //     //   distance: x.distance,
+  //     //   modifier: x.maneuver.modifier,
+  //     //   type: x.maneuver.type,
+  //     //   name: x.name,
+  //     //   rotary_name: x?.rotary_name,
+  //     //   dir: directions[
+  //     //     `${x.maneuver.type ?? ""}-${x.maneuver.modifier ?? ""}`
+  //     //   ],
+  //     // });
+
+  //     // console.log(
+  //     //   `در ${x.name} ${
+  //     //     directions[`${x.maneuver.type ?? ""}-${x.maneuver.modifier ?? ""}`]
+  //     //   }`
+  //     // );
+
+  //     return {
+  //       distance: x.distance,
+  //       driving_side: x.driving_side,
+  //       modifier: x.maneuver.modifier,
+  //       type: x.maneuver.type,
+  //       bearing_before: x.maneuver.bearing_before,
+  //       bearing_after: x.maneuver.bearing_after,
+  //       mode: x.mode,
+  //       name: x.name,
+  //       rotary_name: x?.rotary_name,
+  //     };
+  //   });
+  // }, [allRoutes]);
 
   const handleClick = () => {
     let newCenter = [...center];
@@ -97,49 +267,9 @@ const FreeMap = () => {
     }
   };
 
-  const handleBack = () => {
-    switch (coordinates.step) {
-      case 3:
-        setCoordinates(
-          {
-            method: "",
-            step: 2,
-          },
-          {
-            history: "replace",
-          }
-        );
-        break;
-      case 2:
-        setCoordinates(
-          {
-            destination: "",
-            step: 1,
-          },
-          {
-            history: "replace",
-          }
-        );
-        break;
-      case 1:
-        setCoordinates(
-          {
-            startLocation: "",
-            step: 0,
-          },
-          {
-            history: "replace",
-          }
-        );
-        break;
-      default:
-        break;
-    }
-  };
-
   return (
     <div className="w-full h-dvh relative ">
-      {routeIsFetching && (
+      {/* {routeIsFetching && (
         <div className="fixed flex flex-col gap-5 inset-0 bg-gray-600/50 z-50 pt-10 text-center text-white">
           <Spinner size={50} color="text-primary-700" />
           <span className="text-2xl">در حال مسیریابی...</span>
@@ -205,11 +335,11 @@ const FreeMap = () => {
         )}
         <button
           className={`p-1 border-2 rounded-lg mt-2 h-12 w-full focus:shadow-md hover:opacity-85 border-red-700 text-red-600`}
-          onClick={handleBack}
+          onClick={() => navigate(-1)}
         >
           بازگشت
         </button>
-      </div>
+      </div> */}
 
       <Suspense fallback={<Spinner />}>
         <MapWrapper
@@ -220,7 +350,8 @@ const FreeMap = () => {
           setCenter={setCenter}
           showCenterMarker={coordinates.step < 2}
         >
-          {!allRoutes && (
+          <RoutingMachine />
+          {/* {!allRoutes && (
             <>
               {coordinates?.startLocation && (
                 <Marker
@@ -243,7 +374,7 @@ const FreeMap = () => {
                 </Marker>
               )}
             </>
-          )}
+          )} */}
           <ZoomControl position="bottomright" />
           {coordinates.step > 2 && <RoutingPath />}
         </MapWrapper>

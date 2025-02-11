@@ -1,5 +1,4 @@
 import {
-  Convertshape2,
   GlobalSearch,
   Icon,
   Location,
@@ -24,8 +23,10 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <div
       onClick={handleOnClick}
-      className={`bg-white  p-2 rounded-lg  cursor-pointer transition-all hover:scale-105 ${
-        active ? "text-primary-700" : " text-stone-300 hover:text-primary-700"
+      className={`bg-white  p-2 rounded-lg  cursor-pointer border-2 transition-all hover:scale-105 ${
+        active
+          ? "text-primary-700  border-primary-700"
+          : " text-stone-400  border-stone-400 "
       }`}
       title={title}
     >
@@ -41,7 +42,11 @@ const Button: React.FC<ButtonProps> = ({
   );
 };
 
-const ActionButtons = () => {
+type ActionButtonsProps = {
+  colDir?: boolean;
+};
+
+const ActionButtons: React.FC<ActionButtonsProps> = ({ colDir = true }) => {
   const {
     showCityCenter,
     toggleCityCenter,
@@ -54,7 +59,7 @@ const ActionButtons = () => {
   } = useMapContext();
 
   return (
-    <div className="flex gap-3 mb-3 select-none">
+    <div className={`${colDir ? "grid" : "flex"} gap-3 mb-3 select-none`}>
       <Button
         Icon={Location}
         active={showCityCenter}
@@ -78,12 +83,6 @@ const ActionButtons = () => {
         active={showDirections}
         handleOnClick={toggleDirections}
         title="نمایش اطلاعات مسیریابی"
-      />
-      <Button
-        Icon={Convertshape2}
-        active={showDirections}
-        handleOnClick={toggleDirections}
-        title="انتخاب روی نقشه"
       />
     </div>
   );

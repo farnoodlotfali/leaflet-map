@@ -20,7 +20,7 @@ const MapLayerControl: React.FC<MapLayerControlProps> = ({
     <>
       <button
         onClick={toggleModal}
-        className="text-primary-700 bg-white p-1 rounded-lg border-primary-700 border-2 absolute top-1 left-1 z-10"
+        className="text-primary-700 bg-white p-1 rounded-lg border-primary-700 border-2 absolute top-1 right-1 z-10"
       >
         <Layer size="32" color="currentcolor" variant="Broken" />
       </button>

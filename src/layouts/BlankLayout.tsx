@@ -63,6 +63,7 @@ const Drawer = () => {
         <Link
           to={PagesUrls.limit}
           className=" my-5 pb-3 flex gap-2 justify-center items-center h-fit border-b-2 border-b-primary-700"
+          onClick={closeDrawer}
         >
           <img className="w-8 h-8" src="/vite.svg" alt="vite" />
           <h1 className="text-md">Vite Leaflet</h1>
