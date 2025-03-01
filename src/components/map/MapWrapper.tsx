@@ -22,6 +22,7 @@ import { LAYER_ITEMS } from "../../data/map-layers";
 import MapLayerControl from "./MapLayerControl";
 import { MapLayerType } from "../../types";
 import MapLayerControlV2 from "./MapLayerControl_v2";
+import MapLayerControlV3 from "./MapLayerControl_v3";
 
 L.Marker.prototype.options.icon = blueMarker;
 const key = new Date().getTime();
@@ -36,6 +37,7 @@ type MapWrapperProps = {
   flyTo?: any;
   tileV1?: any;
   tileV2?: any;
+  tileV3?: any;
 };
 
 const MapWrapper: React.FC<PropsWithChildren<MapWrapperProps>> = ({
@@ -48,6 +50,7 @@ const MapWrapper: React.FC<PropsWithChildren<MapWrapperProps>> = ({
   zoom = DEFAULT_ZOOM,
   tileV1 = false,
   tileV2 = false,
+  tileV3 = false,
   flyTo = {
     zoom: null,
     center: null,
@@ -75,13 +78,18 @@ const MapWrapper: React.FC<PropsWithChildren<MapWrapperProps>> = ({
 
   return (
     <>
+      {tileV3 && (
+        <MapLayerControlV3
+          selectedLayer={selectedLayer}
+          handleOnSelect={handleLayer}
+        />
+      )}
       {tileV1 && (
         <MapLayerControl
           selectedLayer={selectedLayer}
           handleOnSelect={handleLayer}
         />
       )}
-
       <MapContainer
         key={key}
         center={center}

@@ -17,8 +17,9 @@ import { blueMarker, redMarker } from "../utils/markers";
 import { useNavigate } from "react-router";
 import L, { PathOptions } from "leaflet";
 import "leaflet-routing-machine";
-import { createControlComponent } from "@react-leaflet/core";
+import { createControlComponent, createElementHook } from "@react-leaflet/core";
 import { boolean } from "zod";
+import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 
 const MapWrapper = lazy(() => import("../components/map/MapWrapper"));
 
@@ -94,39 +95,39 @@ const directions: any = {
   "arrive-": "رسیدید",
 };
 
-const createRoutineMachineLayer = (props: any) => {
+const createRoutineMachineLayer = ({ waypoints }: any) => {
   const instance = L.Routing.control({
-    waypoints: [L.latLng(35.6892, 51.389), L.latLng(32.667125, 51.679688)],
+    waypoints: waypoints,
     lineOptions: {
-      styles: [{ color: "#f0f", weight: 9 }],
+      styles: [{ color: "#800080", weight: 9 }],
       extendToWaypoints: false,
       missingRouteTolerance: 1,
     },
-    show: false,
+    // show: false,
     addWaypoints: false,
     routeWhileDragging: true,
-    // draggableWaypoints: false,
-    fitSelectedRoutes: true,
+    // // draggableWaypoints: false,
+    // // fitSelectedRoutes: true,
     showAlternatives: true,
-    // waypointMode: "snap",
-    collapsible: false,
-    router: new L.Routing.OSRMv1({
-      serviceUrl: "https://routing.openstreetmap.de/routed-car/route/v1",
-    }),
-    containerClassName: "bg-red-500 overflow-y-scroll max-h-screen !m-0 ",
-    useZoomParameter: true,
+    // // waypointMode: "snap",
+    // collapsible: false,
+    // router: new L.Routing.OSRMv1({
+    //   serviceUrl: "https://routing.openstreetmap.de/routed-car/route/v1",
+    // }),
+    // containerClassName: "bg-red-500 overflow-y-scroll max-h-screen !m-0 ",
+    // useZoomParameter: true,
     altLineOptions: {
       styles: [
         {
           weight: 4,
-          color: "gray",
+          color: "#bc5dac",
           dashArray: "3, 8",
           lineCap: "square",
           lineJoin: "miter",
         },
         {
           weight: 12,
-          color: "red",
+          color: "#55006b",
           lineCap: "square",
           lineJoin: "miter",
           opacity: 0.2,
@@ -136,7 +137,7 @@ const createRoutineMachineLayer = (props: any) => {
       missingRouteTolerance: 0,
     },
     autoRoute: true,
-    waypointMode: "connect",
+    // waypointMode: "connect",
     // pointMarkerStyle: {
     //   color: "red",
     // },
@@ -144,10 +145,7 @@ const createRoutineMachineLayer = (props: any) => {
     //   return null;
     // },
     // language: 'it',
-    
   });
-
-  console.log(instance);
 
   return instance;
 };
@@ -156,7 +154,7 @@ const RoutingMachine = createControlComponent(createRoutineMachineLayer);
 
 const FreeMap = () => {
   const navigate = useNavigate();
-  const { handleSetRoutes, distance, duration } = useMapContext();
+  // const { handleSetRoutes, distance, duration } = useMapContext();
 
   const [coordinates, setCoordinates] = useQueryStates(
     {
@@ -268,7 +266,7 @@ const FreeMap = () => {
   };
 
   return (
-    <div className="w-full h-dvh relative ">
+    <div className="w-full h-dvh relative  ">
       {/* {routeIsFetching && (
         <div className="fixed flex flex-col gap-5 inset-0 bg-gray-600/50 z-50 pt-10 text-center text-white">
           <Spinner size={50} color="text-primary-700" />
@@ -346,11 +344,16 @@ const FreeMap = () => {
           zoom={11}
           doubleClickZoom={true}
           scrollWheelZoom={true}
-          tileV1={true}
+          tileV3={true}
           setCenter={setCenter}
           showCenterMarker={coordinates.step < 2}
         >
-          <RoutingMachine />
+          <RoutingMachine
+            waypoints={[
+              L.latLng(35.6892, 51.389),
+              L.latLng(32.667125, 51.679688),
+            ]}
+          />
           {/* {!allRoutes && (
             <>
               {coordinates?.startLocation && (
@@ -375,6 +378,7 @@ const FreeMap = () => {
               )}
             </>
           )} */}
+          {/* <Routing1 /> */}
           <ZoomControl position="bottomright" />
           {coordinates.step > 2 && <RoutingPath />}
         </MapWrapper>
