@@ -3,19 +3,19 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "IRANSansXV";
-  src: local("IRANSansXV"), url(./assets/fonts/IRANSansXV.woff2) format("woff2");
+  font-family: "Vazirmatn";
+  src: local("Vazirmatn"), url(./assets/fonts/Vazirmatn[wght].ttf) format("truetype");
 }
 
 * {
   margin: 0;
   padding: 0;
-  font-family: IRANSansXV, sans-serif;
+  font-family: Vazirmatn, sans-serif;
   box-sizing: border-box;
 }
 
 body {
-  font-family: IRANSansXV, sans-serif;
+  font-family: Vazirmatn, sans-serif;
 }
 
 a {

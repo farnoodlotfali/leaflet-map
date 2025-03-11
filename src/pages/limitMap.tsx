@@ -2,7 +2,6 @@ import { lazy, Suspense, useEffect } from "react";
 import { useMapContext } from "../hooks/useMapContext";
 import Spinner from "../components/Spinner";
 import InfoItem from "../components/InfoItem";
-import { enToFaNumber, reformatRoutes } from "../utils/utils";
 import { ZoomControl } from "react-leaflet";
 import MapHandel from "../components/MapHandel";
 import RoutingPath from "../components/RoutingPath";
@@ -18,6 +17,8 @@ import SelectInput from "../components/SelectInput";
 import { CITY_CENTER_ITEMS } from "../data/city-names";
 import { METHOD_NAME_ITEMS } from "../data/route-method";
 import ActionButtons from "../components/ActionButtons";
+import { enToFaNumber } from "../utils/enToFaNumber";
+import { reformatRoutes } from "../utils/reformatRoutes";
 
 const MapWrapper = lazy(() => import("../components/map/MapWrapper"));
 

@@ -9,7 +9,6 @@ import { useMapRoute } from "../hooks/useMapRoute";
 import { MapLocationResponse, MapRoutesResponse, ResponseType } from "../types";
 import { UseQueryResult } from "@tanstack/react-query";
 import { ResponseType2 } from "../types/api";
-import { enToFaNumber, reformatRoutes, stringToLatLng } from "../utils/utils";
 import RoutingPath from "../components/RoutingPath";
 import { useMapContext } from "../hooks/useMapContext";
 import InfoItem from "../components/InfoItem";

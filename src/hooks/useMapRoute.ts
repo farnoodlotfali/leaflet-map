@@ -3,7 +3,7 @@ import { ResponseType } from "../types";
 import { HookApiOptions } from "../types/hookOptions";
 import { MapRoutesRequest, MapRoutesResponse } from "../types";
 import { fetcher } from "../api/axios";
-import { reverseNumbers } from "../utils/utils";
+import { reverseNumbers } from "../utils/reverseNumbers";
 
 export const useMapRoute = (
   data: MapRoutesRequest,

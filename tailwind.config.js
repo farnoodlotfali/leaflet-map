@@ -3,7 +3,7 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     fontFamily: {
-      sans: ['"IRANSansXV"', "sans-serif"],
+      sans: ['"Vazirmatn"', "sans-serif"],
     },
     extend: {
       zIndex: {
