@@ -1,8 +1,8 @@
 import { Marker, Polyline, Tooltip } from "react-leaflet";
-import { useMapContext } from "../hooks/useMapContext";
-import { blueMarker, redMarker } from "../utils/markers";
+import { useMapContext } from "@/hooks/useMapContext";
+import { blueMarker, redMarker } from "@/utils/markers";
 import { Fragment } from "react";
-import { findPolyLineData } from "../utils/findPolyLineData";
+import { findPolyLineData } from "@/utils/findPolyLineData";
 
 const RoutingPath = () => {
   const { routes, selectedRouteIndex, handleSelectedRoute, showRoutes } =

@@ -1,4 +1,4 @@
-import { MapLayerType } from "../types";
+import { MapLayerType } from "@/types";
 
 export const LAYER_ITEMS: MapLayerType[] = [
   {

@@ -1,4 +1,4 @@
-import { ICityCenter } from "../types";
+import { ICityCenter } from "@/types";
 
 export const CITY_CENTER_POINTS: { type: string; features: ICityCenter[] } = {
   type: "FeatureCollection",

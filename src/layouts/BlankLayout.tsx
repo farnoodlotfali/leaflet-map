@@ -1,7 +1,7 @@
 import { HambergerMenu } from "iconsax-react";
 import { useState } from "react";
 import { Link, NavLink, Outlet } from "react-router";
-import { PagesUrls } from "../constant/PagesUrl";
+import { PagesUrls } from "@/constant/PagesUrl";
 
 const LINK_ITEMS = [
   {

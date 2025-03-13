@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { useMap, Marker, Tooltip, Polygon } from "react-leaflet";
-import { IRAN_CITY_ITEMS } from "../data/iran-city";
-import { CITY_CENTER_POINTS } from "../data/city-center";
-import { useMapContext } from "../hooks/useMapContext";
-import { yellowMarker } from "../utils/markers";
+import { IRAN_CITY_ITEMS } from "@/data/iran-city";
+import { CITY_CENTER_POINTS } from "@/data/city-center";
+import { useMapContext } from "@/hooks/useMapContext";
+import { yellowMarker } from "@/utils/markers";
 
 const MapHandel = () => {
   const { showCityCenter, showCityLine } = useMapContext();

@@ -1,12 +1,12 @@
 import { lazy, Suspense } from "react";
-import Spinner from "../components/Spinner";
+import Spinner from "@/components/Spinner";
 import { Marker, Polyline, Tooltip, ZoomControl } from "react-leaflet";
-import { BEARING_TEHRAN_ZAHEDAN, PATH_TEHRAN_ZAHEDAN } from "../data/teh-zah";
+import { BEARING_TEHRAN_ZAHEDAN, PATH_TEHRAN_ZAHEDAN } from "@/data/teh-zah";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import { LatLngExpression } from "leaflet";
-import { blueMarker, circleGreenMarker, redMarker } from "../utils/markers";
+import { blueMarker, circleGreenMarker, redMarker } from "@/utils/markers";
 
-const MapWrapper = lazy(() => import("../components/map/MapWrapper"));
+const MapWrapper = lazy(() => import("@/components/map/MapWrapper"));
 
 const ClusterMap = () => {
   return (

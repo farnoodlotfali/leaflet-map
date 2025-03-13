@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { MapContext } from "../context/mapContext";
+import { MapContext } from "@/context/mapContext";
 
 export const useMapContext = () => {
   const ctx = useContext(MapContext);

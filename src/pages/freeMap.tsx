@@ -1,18 +1,18 @@
 import { lazy, Suspense, useEffect, useState } from "react";
-import Spinner from "../components/Spinner";
+import Spinner from "@/components/Spinner";
 import { Marker, Tooltip, useMap, ZoomControl } from "react-leaflet";
 import { parseAsInteger, parseAsString, useQueryStates } from "nuqs";
-import { useMapLocation } from "../hooks/useMapLocation";
-import { METHOD_NAME_ITEMS } from "../data/route-method";
-import { DEFAULT_CENTER } from "../constant/map";
-import { useMapRoute } from "../hooks/useMapRoute";
-import { MapLocationResponse, MapRoutesResponse, ResponseType } from "../types";
+import { useMapLocation } from "@/hooks/useMapLocation";
+import { METHOD_NAME_ITEMS } from "@/data/route-method";
+import { DEFAULT_CENTER } from "@/constant/map";
+import { useMapRoute } from "@/hooks/useMapRoute";
+import { MapLocationResponse, MapRoutesResponse, ResponseType } from "@/types";
 import { UseQueryResult } from "@tanstack/react-query";
-import { ResponseType2 } from "../types/api";
-import RoutingPath from "../components/RoutingPath";
-import { useMapContext } from "../hooks/useMapContext";
-import InfoItem from "../components/InfoItem";
-import { blueMarker, redMarker } from "../utils/markers";
+import { ResponseType2 } from "@/types/api";
+import RoutingPath from "@/components/RoutingPath";
+import { useMapContext } from "@/hooks/useMapContext";
+import InfoItem from "@/components/InfoItem";
+import { blueMarker, redMarker } from "@/utils/markers";
 import { useNavigate } from "react-router";
 import L, { PathOptions } from "leaflet";
 import "leaflet-routing-machine";
@@ -20,7 +20,7 @@ import { createControlComponent, createElementHook } from "@react-leaflet/core";
 import { boolean } from "zod";
 import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 
-const MapWrapper = lazy(() => import("../components/map/MapWrapper"));
+const MapWrapper = lazy(() => import("@/components/map/MapWrapper"));
 
 const STEPS_TITLE = ["مبدا", "مقصد", "نوع پیمایش"];
 

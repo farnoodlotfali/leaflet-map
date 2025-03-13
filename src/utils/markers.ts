@@ -1,10 +1,10 @@
 import L from "leaflet";
-import blueMarkerIcon from "../assets/img/marker-blue.svg";
-import greenMarkerIcon from "../assets/img/marker-green.svg";
-import redMarkerIcon from "../assets/img/marker-red.svg";
-import yellowMarkerIcon from "../assets/img/marker-yellow.svg";
-import circlePrimaryMarkerIcon from "../assets/img/circle_arrow_up_primary.svg";
-import blueSkyMarkerIcon from "../assets/img/marker-blue-sky.svg";
+import blueMarkerIcon from "@/assets/img/marker-blue.svg";
+import greenMarkerIcon from "@/assets/img/marker-green.svg";
+import redMarkerIcon from "@/assets/img/marker-red.svg";
+import yellowMarkerIcon from "@/assets/img/marker-yellow.svg";
+import circlePrimaryMarkerIcon from "@/assets/img/circle_arrow_up_primary.svg";
+import blueSkyMarkerIcon from "@/assets/img/marker-blue-sky.svg";
 
 export const blueMarker = L.icon({
   iconUrl: blueMarkerIcon,

@@ -1,4 +1,4 @@
-import { ICity } from "../types";
+import { ICity } from "@/types";
 
 export const IRAN_CITY_ITEMS: ICity[] = [
   {

@@ -1,26 +1,20 @@
-import { lazy, Suspense, useEffect } from "react";
-import { useMapContext } from "../hooks/useMapContext";
-import Spinner from "../components/Spinner";
-import InfoItem from "../components/InfoItem";
-import { ZoomControl } from "react-leaflet";
-import MapHandel from "../components/MapHandel";
-import RoutingPath from "../components/RoutingPath";
+import { useEffect } from "react";
+import { useMapContext } from "@/hooks/useMapContext";
+import Spinner from "@/components/Spinner";
+import InfoItem from "@/components/InfoItem";
 import { parseAsString, useQueryStates } from "nuqs";
 import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UseQueryResult } from "@tanstack/react-query";
-import { MapRoutesResponse, ResponseType } from "../types";
-import { useMapRoute } from "../hooks/useMapRoute";
+import { MapRoutesResponse, ResponseType } from "@/types";
+import { useMapRoute } from "@/hooks/useMapRoute";
 import { toast } from "react-toastify";
-import SelectInput from "../components/SelectInput";
-import { CITY_CENTER_ITEMS } from "../data/city-names";
-import { METHOD_NAME_ITEMS } from "../data/route-method";
-import ActionButtons from "../components/ActionButtons";
-import { enToFaNumber } from "../utils/enToFaNumber";
-import { reformatRoutes } from "../utils/reformatRoutes";
-
-const MapWrapper = lazy(() => import("../components/map/MapWrapper"));
+import SelectInput from "@/components/SelectInput";
+import { CITY_CENTER_ITEMS } from "@/data/city-names";
+import { METHOD_NAME_ITEMS } from "@/data/route-method";
+import { enToFaNumber } from "@/utils/enToFaNumber";
+import { reformatRoutes } from "@/utils/reformatRoutes";
 
 const RouteFormSchema = z.object({
   startLocation: z.string().nonempty({ message: "مبدا را انتخاب کنید" }),
@@ -88,11 +82,20 @@ const FormMapBox = () => {
     }));
   };
 
+  if (isFetching) {
+    return (
+      <div className="absolute inset-0 left-0 z-30  bg-white/30 backdrop-blur-sm pt-10  ">
+        <Spinner color="text-primary-700" size={35} />
+        <p className="text-center text-primary-700 font-medium text-xl mt-2">
+          محاسبه مسیر...
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="absolute bottom-0 right-0 left-0 z-30 ">
-      {isFetching ? (
-        <Spinner />
-      ) : !coordinates.destination ? (
+      {!coordinates.destination ? (
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 md:grid-cols-4 sm:grid-cols-3   gap-4 container bg-white shadow-2xl rounded-lg p-4 mx-auto">
             <SelectInput
@@ -169,34 +172,4 @@ const FormMapBox = () => {
   );
 };
 
-const LimitMap = () => {
-  return (
-    <div className="w-full h-dvh relative">
-      <div className="absolute z-10 top-14 right-1">
-        <ActionButtons colDir />
-      </div>
-      <FormMapBox />
-
-      <Suspense fallback={<Spinner />}>
-        <MapWrapper
-          zoom={6}
-          doubleClickZoom={true}
-          scrollWheelZoom={true}
-          tileV1={true}
-          showCenterMarker={false}
-        >
-          <ZoomControl position="bottomright" />
-
-          <Suspense>
-            <MapHandel />
-          </Suspense>
-          <Suspense fallback={<Spinner />}>
-            <RoutingPath />
-          </Suspense>
-        </MapWrapper>
-      </Suspense>
-    </div>
-  );
-};
-
-export default LimitMap;
+export default FormMapBox;

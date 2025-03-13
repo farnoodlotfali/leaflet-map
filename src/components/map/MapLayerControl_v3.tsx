@@ -1,8 +1,8 @@
 import { Layer, LocationTick, Map1 } from "iconsax-react";
 import Modal from "../Modal";
-import { LAYER_ITEMS } from "../../data/map-layers";
+import { LAYER_ITEMS } from "@/data/map-layers";
 import { useState } from "react";
-import { MapLayerType } from "../../types";
+import { MapLayerType } from "@/types";
 
 type MapLayerControlV3Props = {
   selectedLayer: MapLayerType;

@@ -4,7 +4,8 @@ import ErrorElement from "./components/ErrorElement";
 import Spinner from "./components/Spinner";
 
 const lazyLoadRoutes = (componentName: string, src = "pages") => {
-  const LazyElement = lazy(() => import(`./${src}/${componentName}.tsx`));
+  const LazyElement = lazy(() => import(`./${src}/${componentName}`));
+  // const LazyElement = lazy(() => import(`./${src}/${componentName}.tsx`));
 
   return (
     <Suspense
@@ -28,7 +29,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: lazyLoadRoutes("limitMap"),
+        element: lazyLoadRoutes("limit-map"),
       },
       {
         element: lazyLoadRoutes("freeMap"),

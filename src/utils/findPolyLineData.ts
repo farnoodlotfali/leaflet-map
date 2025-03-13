@@ -1,5 +1,5 @@
 import { LatLngExpression } from "leaflet";
-import { MapRoutesResponse } from "../types";
+import { MapRoutesResponse } from "@/types";
 
 export const findPolyLineData = (
   route: MapRoutesResponse

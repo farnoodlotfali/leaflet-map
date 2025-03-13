@@ -1,4 +1,4 @@
-import { LAYER_ITEMS } from "../../data/map-layers";
+import { LAYER_ITEMS } from "@/data/map-layers";
 import { LayersControl, TileLayer } from "react-leaflet";
 
 const MapLayerControlV2 = () => {

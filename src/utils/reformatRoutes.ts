@@ -1,4 +1,4 @@
-import { MapRoutesResponse } from "../types";
+import { MapRoutesResponse } from "@/types";
 import { deepCopy } from "./deepCopy";
 
 export const reformatRoutes = (

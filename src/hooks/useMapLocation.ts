@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { MapLocationRequest, MapLocationResponse } from "../types";
-import { HookApiOptions2 } from "../types/hookOptions";
-import { fetcher2 } from "../api/axios";
-import { ResponseType2 } from "../types/api";
+import { MapLocationRequest, MapLocationResponse } from "@/types";
+import { HookApiOptions2 } from "@/types/hookOptions";
+import { fetcher2 } from "@/api/axios";
+import { ResponseType2 } from "@/types/api";
 
 export const useMapLocation = (
   data: MapLocationRequest,

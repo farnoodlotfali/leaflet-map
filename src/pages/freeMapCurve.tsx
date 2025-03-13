@@ -1,16 +1,16 @@
 import { lazy, Suspense, useState } from "react";
-import Spinner from "../components/Spinner";
+import Spinner from "@/components/Spinner";
 import { Marker, Tooltip, ZoomControl } from "react-leaflet";
 import { parseAsInteger, parseAsString, useQueryStates } from "nuqs";
-import { DEFAULT_CENTER } from "../constant/map";
-import { blueMarker, redMarker } from "../utils/markers";
+import { DEFAULT_CENTER } from "@/constant/map";
+import { blueMarker, redMarker } from "@/utils/markers";
 import { useNavigate } from "react-router";
-import { useMapFlyTo } from "../hooks/useMapFlyTo";
-import MapArrowArc from "../components/map/MapArrowArc";
-import { stringToNumbers } from "../utils/stringToNumbers";
-import { stringToLatLng } from "../utils/stringToLatLng";
+import { useMapFlyTo } from "@/hooks/useMapFlyTo";
+import MapArrowArc from "@/components/map/MapArrowArc";
+import { stringToNumbers } from "@/utils/stringToNumbers";
+import { stringToLatLng } from "@/utils/stringToLatLng";
 
-const MapWrapper = lazy(() => import("../components/map/MapWrapper"));
+const MapWrapper = lazy(() => import("@/components/map/MapWrapper"));
 
 const STEP_ITEMS = [
   {

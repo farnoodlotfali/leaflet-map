@@ -1,4 +1,4 @@
-import { CITY_CENTER_POINTS } from "../data/city-center";
+import { CITY_CENTER_POINTS } from "@/data/city-center";
 
 type CitySelectProps = {
   placeholder: string;

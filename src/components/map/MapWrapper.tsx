@@ -11,16 +11,16 @@ import {
   DEFAULT_SCROLL_WHEEL_ZOOM,
   DEFAULT_SHOW_MARKER,
   DEFAULT_ZOOM,
-} from "../../constant/map";
+} from "@/constant/map";
 // we can rotate icon or marker with this package
 
 import MapHandleFlyTo from "./MapHandleFlyTo";
-import { blueMarker } from "../../utils/markers";
-import icon from "../../assets/img/marker-primary.svg";
-import { LAYER_ITEMS } from "../../data/map-layers";
+import { blueMarker } from "@/utils/markers";
+import icon from "@/assets/img/marker-primary.svg";
+import { LAYER_ITEMS } from "@/data/map-layers";
 
 import MapLayerControl from "./MapLayerControl";
-import { MapLayerType } from "../../types";
+import { MapLayerType } from "@/types";
 import MapLayerControlV2 from "./MapLayerControl_v2";
 import MapLayerControlV3 from "./MapLayerControl_v3";
 
